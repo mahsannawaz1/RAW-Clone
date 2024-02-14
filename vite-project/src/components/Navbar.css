@@ -1,0 +1,30 @@
+.search {
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  color: white;
+}
+
+.search-div {
+  background-color: rgb(0, 0, 0, 0.1);
+}
+.width-30 {
+  width: 42px;
+  height: 22px;
+  outline: 0;
+  border: 0;
+}
+.modes button {
+  background: palegreen;
+  margin-right: 0.5rem;
+}
+.bg-blue {
+  background: white;
+  width: 17px;
+  height: 17px;
+  margin-top: 0.07rem;
+  top: 2px;
+}
+.modes > p {
+  color: white;
+}
