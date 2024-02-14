@@ -15,7 +15,6 @@
   border: 0;
 }
 .modes button {
-  background: palegreen;
   margin-right: 0.5rem;
 }
 .bg-blue {
@@ -24,7 +23,4 @@
   height: 17px;
   margin-top: 0.07rem;
   top: 2px;
-}
-.modes > p {
-  color: white;
 }
