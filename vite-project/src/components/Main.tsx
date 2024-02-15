@@ -7,14 +7,29 @@ interface Props {
   genreList: GenreType[];
   platformList: PlatformType[];
   gameList: GameType[];
+  selectedGenre: { id: number; name: string };
+  handleChangeGenre: (obj: GenreType) => void;
 }
 
-const Main = ({ genreList, platformList, gameList }: Props) => {
+const Main = ({
+  genreList,
+  platformList,
+  gameList,
+  handleChangeGenre,
+  selectedGenre,
+}: Props) => {
   return (
     <Fragment>
       <div className="d-flex gap-8">
-        <GenreList genreList={genreList} />
-        <GameList platformList={platformList} gameList={gameList} />
+        <GenreList
+          genreList={genreList}
+          handleChangeGenre={handleChangeGenre}
+        />
+        <GameList
+          platformList={platformList}
+          gameList={gameList}
+          selectedGenre={selectedGenre}
+        />
       </div>
     </Fragment>
   );

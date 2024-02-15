@@ -4,9 +4,10 @@ import Genre from "./Genre";
 
 interface Props {
   genreList: GenreType[];
+  handleChangeGenre: (obj: GenreType) => void;
 }
 
-const GenreList = ({ genreList }: Props) => {
+const GenreList = ({ genreList, handleChangeGenre }: Props) => {
   return (
     <Fragment>
       <div className="col">
@@ -14,8 +15,14 @@ const GenreList = ({ genreList }: Props) => {
           <h3 className="mb-3">Genres</h3>
         </div>
         {genreList.length > 0 &&
-          genreList.map(({ name, image_background }) => (
-            <Genre key={name} name={name} image={image_background} />
+          genreList.map(({ id, name, image_background }) => (
+            <Genre
+              key={id}
+              id={id}
+              name={name}
+              image={image_background ?? ""}
+              handleChangeGenre={handleChangeGenre}
+            />
           ))}
       </div>
     </Fragment>

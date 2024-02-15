@@ -7,7 +7,7 @@ import ApiClient, { config } from "./services/ApiClient";
 export interface GenreType {
   id: number;
   name: string;
-  image_background: string;
+  image_background?: string;
 }
 export interface PlatformType {
   id: number;
@@ -30,6 +30,7 @@ function App() {
   const [genres, setGenres] = useState<GenreType[]>([]);
   const [platforms, setPlatforms] = useState<PlatformType[]>([]);
   const [games, setGames] = useState<GameType[]>([]);
+  const [selectedGenre, setGenre] = useState<GenreType>({ id: 0, name: "" });
 
   useEffect(() => {
     ApiClient.get(`/genres?key=${config.API_KEY}`)
@@ -44,12 +45,17 @@ function App() {
   }, []);
 
   useEffect(() => {
-    ApiClient.get(`/games?key=${config.API_KEY}`)
+    setGames([]);
+    const URL =
+      selectedGenre.id !== 0
+        ? `/games?key=${config.API_KEY}&genres=${selectedGenre.id}`
+        : `/games?key=${config.API_KEY}`;
+    ApiClient.get(URL)
       .then(({ data: { results } }) => {
         setGames(results);
       })
       .catch((err) => console.log(err.message));
-  }, []);
+  }, [selectedGenre]);
 
   return (
     <Fragment>
@@ -61,7 +67,13 @@ function App() {
             : setDarkMode({ on: true, color: "palegreen" })
         }
       />
-      <Main genreList={genres} platformList={platforms} gameList={games} />
+      <Main
+        genreList={genres}
+        platformList={platforms}
+        gameList={games}
+        handleChangeGenre={setGenre}
+        selectedGenre={selectedGenre}
+      />
     </Fragment>
   );
 }

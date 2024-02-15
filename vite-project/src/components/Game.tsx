@@ -8,7 +8,7 @@ interface Props {
 }
 
 const Game = ({
-  game: { name, metacritic, released, background_image, parent_platforms },
+  game: { name, metacritic, background_image, parent_platforms },
 }: Props) => {
   return (
     <Fragment>

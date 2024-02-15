@@ -4,6 +4,7 @@ import {
   FaPlaystation,
   FaApple,
   FaLinux,
+  FaAndroid,
 } from "react-icons/fa";
 import { MdOutlinePhoneAndroid } from "react-icons/md";
 import {
@@ -26,11 +27,11 @@ const Platform = ({ platformName }: Props) => {
           <FaPlaystation size={20} color="grey" />
         )) ||
         (platformName === "xbox" && <FaXbox size={20} color="grey" />) ||
-        platformName === "ios" ||
-        (platformName === "mac" && <FaApple size={20} color="grey" />) ||
-        (platformName === "android" && (
+        (platformName === "ios" && (
           <MdOutlinePhoneAndroid size={20} color="grey" />
         )) ||
+        (platformName === "mac" && <FaApple size={20} color="grey" />) ||
+        (platformName === "android" && <FaAndroid size={20} color="grey" />) ||
         (platformName === "nintendo" && (
           <SiNintendo size={20} color="grey" />
         )) ||
