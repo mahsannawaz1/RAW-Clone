@@ -22,10 +22,10 @@ const Game = ({
           <div className="d-flex justify-content-between">
             <div className="d-flex gap-2">
               {parent_platforms.map(({ platform: { id, slug } }) => (
-                <Platform key={id} platformName={slug} />
+                <Platform key={id} platformName={slug ?? ""} />
               ))}
             </div>
-            <div className="metacritic px-1">{metacritic}</div>
+            <div className="metacritic px-1">{metacritic ?? "No Critics"}</div>
           </div>
           <h3 className="mt-1 mb-0">{name}</h3>
         </div>

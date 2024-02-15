@@ -26,7 +26,9 @@ const Platform = ({ platformName }: Props) => {
         (platformName === "playstation" && (
           <FaPlaystation size={20} color="grey" />
         )) ||
-        (platformName === "xbox" && <FaXbox size={20} color="grey" />) ||
+        ((platformName === "xbox" ||
+          platformName === "xbox-series-x" ||
+          platformName === "xbox360") && <FaXbox size={20} color="grey" />) ||
         (platformName === "ios" && (
           <MdOutlinePhoneAndroid size={20} color="grey" />
         )) ||

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import { Fragment, useRef } from "react";
 import "./GameList.css";
 import { PlatformType, GameType } from "../App";
 import Game from "./Game";
@@ -7,24 +7,39 @@ interface Props {
   platformList: PlatformType[];
   gameList: GameType[];
   selectedGenre: { id: number; name: string };
+  currentPlatform: PlatformType;
+  handleChangePlatform: (obj: PlatformType) => void;
 }
 
-const GameList = ({ platformList, gameList, selectedGenre }: Props) => {
-  const [fakeCardVisibility, setfakeCardVisibility] = useState(true);
-  useEffect(() => {
-    fakeCardVisibility
-      ? setfakeCardVisibility(false)
-      : setfakeCardVisibility(true);
-    console.log("call");
-  }, [gameList]);
+const GameList = ({
+  platformList,
+  gameList,
+  selectedGenre,
+  currentPlatform,
+  handleChangePlatform,
+}: Props) => {
+  const platformRef = useRef<HTMLSelectElement>(null);
   return (
     <Fragment>
       <div className="col-10 px-0">
-        <h1>{selectedGenre.name} Games</h1>
+        <h1>
+          {currentPlatform.name} {selectedGenre.name} Games
+        </h1>
         <div className="d-flex dropdowns gap-3 mt-2">
           <div className="dropdown-platform">
             <select
-              defaultValue="Platforms"
+              ref={platformRef}
+              onChange={() => {
+                const platform = platformList.find(
+                  (platform) =>
+                    platform.id === parseInt(platformRef.current!.value)
+                );
+
+                handleChangePlatform({
+                  id: platform?.id ?? 0,
+                  name: platform?.name ?? "",
+                });
+              }}
               className="p-2 d-flex"
               name=""
               id=""
@@ -32,7 +47,7 @@ const GameList = ({ platformList, gameList, selectedGenre }: Props) => {
               <option hidden>Platforms</option>
               {platformList.length !== 0 &&
                 platformList.map(({ id, name }) => (
-                  <option key={id} value={name}>
+                  <option key={id} value={id}>
                     {name}
                   </option>
                 ))}
@@ -48,7 +63,9 @@ const GameList = ({ platformList, gameList, selectedGenre }: Props) => {
           </div>
         </div>
         <div className="games-grid gap-4 w-100 mt-4">
-          {gameList.length == 0 && (
+          {gameList.length !== 0 ? (
+            gameList.map((game) => <Game key={game.id} game={game} />)
+          ) : (
             <Fragment>
               <div className="card p-0 border-0  bg">
                 <div className="card-img-top bg-card game-img"></div>
@@ -103,8 +120,6 @@ const GameList = ({ platformList, gameList, selectedGenre }: Props) => {
               </div>
             </Fragment>
           )}
-          {gameList.length !== 0 &&
-            gameList.map((game) => <Game key={game.id} game={game} />)}
         </div>
       </div>
     </Fragment>

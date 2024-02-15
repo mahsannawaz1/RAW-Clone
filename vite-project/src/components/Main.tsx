@@ -7,8 +7,10 @@ interface Props {
   genreList: GenreType[];
   platformList: PlatformType[];
   gameList: GameType[];
-  selectedGenre: { id: number; name: string };
+  selectedGenre: GenreType;
   handleChangeGenre: (obj: GenreType) => void;
+  currentPlatform: PlatformType;
+  handleChangePlatform: (obj: PlatformType) => void;
 }
 
 const Main = ({
@@ -17,6 +19,8 @@ const Main = ({
   gameList,
   handleChangeGenre,
   selectedGenre,
+  currentPlatform,
+  handleChangePlatform,
 }: Props) => {
   return (
     <Fragment>
@@ -29,6 +33,8 @@ const Main = ({
           platformList={platformList}
           gameList={gameList}
           selectedGenre={selectedGenre}
+          handleChangePlatform={handleChangePlatform}
+          currentPlatform={currentPlatform}
         />
       </div>
     </Fragment>

@@ -12,7 +12,7 @@ export interface GenreType {
 export interface PlatformType {
   id: number;
   name: string;
-  slug: string;
+  slug?: string;
 }
 
 export interface GameType {
@@ -31,6 +31,10 @@ function App() {
   const [platforms, setPlatforms] = useState<PlatformType[]>([]);
   const [games, setGames] = useState<GameType[]>([]);
   const [selectedGenre, setGenre] = useState<GenreType>({ id: 0, name: "" });
+  const [currentPlatform, setPlatform] = useState<PlatformType>({
+    id: 0,
+    name: "",
+  });
 
   useEffect(() => {
     ApiClient.get(`/genres?key=${config.API_KEY}`)
@@ -46,16 +50,18 @@ function App() {
 
   useEffect(() => {
     setGames([]);
-    const URL =
+    let URL =
       selectedGenre.id !== 0
         ? `/games?key=${config.API_KEY}&genres=${selectedGenre.id}`
         : `/games?key=${config.API_KEY}`;
+    URL =
+      currentPlatform.id !== 0 ? URL + `&platforms=${currentPlatform.id}` : URL;
     ApiClient.get(URL)
       .then(({ data: { results } }) => {
         setGames(results);
       })
       .catch((err) => console.log(err.message));
-  }, [selectedGenre]);
+  }, [selectedGenre, currentPlatform]);
 
   return (
     <Fragment>
@@ -73,6 +79,8 @@ function App() {
         gameList={games}
         handleChangeGenre={setGenre}
         selectedGenre={selectedGenre}
+        handleChangePlatform={setPlatform}
+        currentPlatform={currentPlatform}
       />
     </Fragment>
   );
