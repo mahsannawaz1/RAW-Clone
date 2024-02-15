@@ -1,20 +1,20 @@
 import { Fragment } from "react";
 import GenreList from "./GenreList";
-import { GenreType } from "../App";
 import GameList from "./GameList";
-import { Platform } from "../App";
+import { GenreType, GameType, PlatformType } from "../App";
 
 interface Props {
   genreList: GenreType[];
-  platformList: Platform[];
+  platformList: PlatformType[];
+  gameList: GameType[];
 }
 
-const Main = ({ genreList, platformList }: Props) => {
+const Main = ({ genreList, platformList, gameList }: Props) => {
   return (
     <Fragment>
       <div className="d-flex gap-8">
         <GenreList genreList={genreList} />
-        <GameList platformList={platformList} />
+        <GameList platformList={platformList} gameList={gameList} />
       </div>
     </Fragment>
   );

@@ -1,13 +1,15 @@
 import React, { Fragment } from "react";
 import "./GameList.css";
-import { Platform } from "../App";
+import { PlatformType, GameType } from "../App";
 import Game from "./Game";
 
 interface Props {
-  platformList: Platform[];
+  platformList: PlatformType[];
+  gameList: GameType[];
 }
 
-const GameList = ({ platformList }: Props) => {
+const GameList = ({ platformList, gameList }: Props) => {
+  console.log(platformList);
   return (
     <Fragment>
       <div className="col-10 px-0">
@@ -38,7 +40,10 @@ const GameList = ({ platformList }: Props) => {
             </select>
           </div>
         </div>
-        <Game />
+        <div className="games-grid gap-4 w-100 mt-4">
+          {gameList.length !== 0 &&
+            gameList.map((game) => <Game key={game.id} game={game} />)}
+        </div>
       </div>
     </Fragment>
   );

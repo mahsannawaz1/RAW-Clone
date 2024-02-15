@@ -9,15 +9,27 @@ export interface GenreType {
   name: string;
   image_background: string;
 }
-export interface Platform {
+export interface PlatformType {
   id: number;
   name: string;
+  slug: string;
+}
+
+export interface GameType {
+  id: number;
+  name: string;
+  released: string;
+  background_image: string;
+  rating: number;
+  metacritic: number;
+  parent_platforms: [{ platform: PlatformType }];
 }
 
 function App() {
   const [darkMode, setDarkMode] = useState({ on: true, color: "palegreen" });
   const [genres, setGenres] = useState<GenreType[]>([]);
-  const [platforms, setPlatforms] = useState<Platform[]>([]);
+  const [platforms, setPlatforms] = useState<PlatformType[]>([]);
+  const [games, setGames] = useState<GameType[]>([]);
 
   useEffect(() => {
     ApiClient.get(`/genres?key=${config.API_KEY}`)
@@ -31,6 +43,14 @@ function App() {
       .catch((err) => console.log(err.message));
   }, []);
 
+  useEffect(() => {
+    ApiClient.get(`/games?key=${config.API_KEY}`)
+      .then(({ data: { results } }) => {
+        setGames(results);
+      })
+      .catch((err) => console.log(err.message));
+  }, []);
+
   return (
     <Fragment>
       <Navbar
@@ -41,7 +61,7 @@ function App() {
             : setDarkMode({ on: true, color: "palegreen" })
         }
       />
-      <Main genreList={genres} platformList={platforms} />
+      <Main genreList={genres} platformList={platforms} gameList={games} />
     </Fragment>
   );
 }
