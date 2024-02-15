@@ -9,11 +9,15 @@ interface Props {
 const GenreList = ({ genreList }: Props) => {
   return (
     <Fragment>
-      <h3 className="mb-3">Genres</h3>
-      {genreList.length > 0 &&
-        genreList.map(({ name, image_background }) => (
-          <Genre key={name} name={name} image={image_background} />
-        ))}
+      <div className="col">
+        <div className="d-flex align-items-center mt-4">
+          <h3 className="mb-3">Genres</h3>
+        </div>
+        {genreList.length > 0 &&
+          genreList.map(({ name, image_background }) => (
+            <Genre key={name} name={name} image={image_background} />
+          ))}
+      </div>
     </Fragment>
   );
 };

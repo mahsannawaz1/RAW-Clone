@@ -1,0 +1,25 @@
+.dropdowns select {
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  color: rgb(225, 225, 225, 90%);
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.dropdown-orderBy,
+.dropdown-platform {
+  background-color: rgb(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+.dropdown-orderBy select option,
+.dropdown-platform select option {
+  background-color: rgb(0, 0, 0, 0.9);
+  color: rgb(225, 225, 225, 90%);
+  font-weight: 500;
+}
+.m-l-5 {
+  margin-left: 120px;
+}

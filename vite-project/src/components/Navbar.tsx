@@ -7,9 +7,9 @@ interface Props {
 }
 const Navbar = ({ darkMode: { on, color }, handleDarkMode }: Props) => {
   return (
-    <nav>
-      <div className="row align-items-center">
-        <div className="col-1">
+    <nav className="mb-5">
+      <div className="row align-items-center justify-content-between">
+        <div className="col-1 width-70">
           <svg
             width="40px"
             height="40px"
@@ -32,7 +32,7 @@ const Navbar = ({ darkMode: { on, color }, handleDarkMode }: Props) => {
             />
           </svg>
         </div>
-        <div className="col-9 px-0">
+        <div className="col-10 px-0">
           <div className="d-flex align-items-center rounded-pill search-div px-3 py-1">
             <CiSearch color="white" size={20} />
             <form action="" className="d-flex w-100 mx-2">
@@ -44,7 +44,7 @@ const Navbar = ({ darkMode: { on, color }, handleDarkMode }: Props) => {
             </form>
           </div>
         </div>
-        <div className="col-2">
+        <div className="col-1">
           <div className="modes d-flex align-items-center">
             <button
               style={{ backgroundColor: color }}

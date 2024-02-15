@@ -7,7 +7,9 @@
   height: 30px;
   object-fit: cover;
 }
-
+.genre-name {
+  word-wrap: none;
+}
 .genre-name:hover {
   text-decoration: underline;
   cursor: pointer;
