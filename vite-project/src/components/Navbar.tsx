@@ -2,10 +2,10 @@ import { CiSearch } from "react-icons/ci";
 import "./Navbar.css";
 
 interface Props {
-  darkMode: { on: boolean; color: string };
+  darkMode: { isOn: boolean; color: string };
   handleDarkMode: () => void;
 }
-const Navbar = ({ darkMode: { on, color }, handleDarkMode }: Props) => {
+const Navbar = ({ darkMode: { isOn: on, color }, handleDarkMode }: Props) => {
   return (
     <nav className="mb-5">
       <div className="row align-items-center justify-content-between">

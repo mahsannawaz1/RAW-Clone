@@ -1,7 +1,9 @@
 import { Fragment } from "react";
 import GenreList from "./GenreList";
 import GameList from "./GameList";
-import { GenreType, GameType, PlatformType } from "../App";
+import { GenreType } from "../interfaces/GenreType";
+import { PlatformType } from "../interfaces/PlatformType";
+import { GameType } from "../interfaces/GameType";
 
 interface Props {
   genreList: GenreType[];

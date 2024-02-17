@@ -1,8 +1,8 @@
 import { Fragment } from "react";
 import "./Game.css";
-import { GameType } from "../App";
 
 import Platform from "./Platform";
+import { GameType } from "../interfaces/GameType";
 interface Props {
   game: GameType;
 }

@@ -1,4 +1,6 @@
-import { GenreType, PlatformType } from "../App";
+
+import { GenreType } from "../interfaces/GenreType";
+import { PlatformType } from "../interfaces/PlatformType";
 import ApiClient, { config } from "./ApiClient"
 
 

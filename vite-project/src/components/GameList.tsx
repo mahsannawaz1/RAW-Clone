@@ -1,7 +1,9 @@
 import { Fragment, useRef } from "react";
 import "./GameList.css";
-import { PlatformType, GameType } from "../App";
+
 import Game from "./Game";
+import { PlatformType } from "../interfaces/PlatformType";
+import { GameType } from "../interfaces/GameType";
 
 interface Props {
   platformList: PlatformType[];

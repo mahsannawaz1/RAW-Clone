@@ -1,6 +1,7 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import "./Genre.css";
-import { GenreType } from "../App";
+import { GenreType } from "../interfaces/GenreType";
+
 interface Props {
   id: number;
   name: string;
