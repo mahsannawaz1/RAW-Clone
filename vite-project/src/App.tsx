@@ -3,7 +3,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import Navbar from "./components/Navbar";
 import Main from "./components/Main";
-import ApiClient, { config } from "./services/ApiClient";
+import GameService from "./services/GameService";
 export interface GenreType {
   id: number;
   name: string;
@@ -35,33 +35,28 @@ function App() {
     id: 0,
     name: "",
   });
+  const [orderBy, setOrderBy] = useState("");
 
   useEffect(() => {
-    ApiClient.get(`/genres?key=${config.API_KEY}`)
+    GameService.getAllGenres()
       .then(({ data: { results } }) => setGenres(results))
       .catch((err) => console.log(err.message));
   }, []);
 
   useEffect(() => {
-    ApiClient.get(`/platforms/lists/parents?key=${config.API_KEY}`)
+    GameService.getAllPlatforms()
       .then(({ data: { results } }) => setPlatforms(results))
       .catch((err) => console.log(err.message));
   }, []);
 
   useEffect(() => {
     setGames([]);
-    let URL =
-      selectedGenre.id !== 0
-        ? `/games?key=${config.API_KEY}&genres=${selectedGenre.id}`
-        : `/games?key=${config.API_KEY}`;
-    URL =
-      currentPlatform.id !== 0 ? URL + `&platforms=${currentPlatform.id}` : URL;
-    ApiClient.get(URL)
+    GameService.getFilteredGames(selectedGenre, currentPlatform, orderBy)
       .then(({ data: { results } }) => {
         setGames(results);
       })
       .catch((err) => console.log(err.message));
-  }, [selectedGenre, currentPlatform]);
+  }, [selectedGenre, currentPlatform, orderBy]);
 
   return (
     <Fragment>
@@ -81,6 +76,7 @@ function App() {
         selectedGenre={selectedGenre}
         handleChangePlatform={setPlatform}
         currentPlatform={currentPlatform}
+        handleChangeOrderBy={setOrderBy}
       />
     </Fragment>
   );

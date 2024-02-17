@@ -9,6 +9,8 @@ interface Props {
   selectedGenre: { id: number; name: string };
   currentPlatform: PlatformType;
   handleChangePlatform: (obj: PlatformType) => void;
+
+  handleChangeOrderBy: (str: string) => void;
 }
 
 const GameList = ({
@@ -17,8 +19,11 @@ const GameList = ({
   selectedGenre,
   currentPlatform,
   handleChangePlatform,
+
+  handleChangeOrderBy,
 }: Props) => {
   const platformRef = useRef<HTMLSelectElement>(null);
+  const orderByRef = useRef<HTMLSelectElement>(null);
   return (
     <Fragment>
       <div className="col-10 px-0">
@@ -53,12 +58,23 @@ const GameList = ({
                 ))}
             </select>
           </div>
-          <div className="dropdown-orderBy">
-            <select className="p-2 d-flex" name="" id="">
-              <option>Order By: Relevance</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+          <div className="dropdown-orderBy d-flex align-items-center">
+            <label htmlFor="" className="font-weight-bold">
+              Order by:
+            </label>
+            <select
+              ref={orderByRef}
+              onChange={(event) => handleChangeOrderBy(event.target.value)}
+              className="p-2 d-flex"
+              name=""
+              id=""
+            >
+              <option value="">Relevance</option>
+              <option value="-date">Date Added</option>
+              <option value="name">Name</option>
+              <option value="-released">Released Date</option>
+              <option value="-metacritic">Popularity</option>
+              <option value="-rating">Average Rating</option>
             </select>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import "./Game.css";
 import { GameType } from "../App";
 
@@ -13,11 +13,16 @@ const Game = ({
   return (
     <Fragment>
       <div className="card p-0 border-0 bg">
-        <img
-          className="card-img-top game-img"
-          src={background_image}
-          alt="Card image cap"
-        />
+        {background_image ? (
+          <img
+            className="card-img-top game-img"
+            src={background_image}
+            alt="Card image cap"
+          />
+        ) : (
+          <div className="card-img-top bg game-img"></div>
+        )}
+
         <div className="card-body">
           <div className="d-flex justify-content-between">
             <div className="d-flex gap-2">

@@ -11,6 +11,7 @@ interface Props {
   handleChangeGenre: (obj: GenreType) => void;
   currentPlatform: PlatformType;
   handleChangePlatform: (obj: PlatformType) => void;
+  handleChangeOrderBy: (str: string) => void;
 }
 
 const Main = ({
@@ -21,6 +22,7 @@ const Main = ({
   selectedGenre,
   currentPlatform,
   handleChangePlatform,
+  handleChangeOrderBy,
 }: Props) => {
   return (
     <Fragment>
@@ -35,6 +37,7 @@ const Main = ({
           selectedGenre={selectedGenre}
           handleChangePlatform={handleChangePlatform}
           currentPlatform={currentPlatform}
+          handleChangeOrderBy={handleChangeOrderBy}
         />
       </div>
     </Fragment>
