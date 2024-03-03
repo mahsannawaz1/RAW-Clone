@@ -7,10 +7,11 @@ import ApiClient, { config } from "./ApiClient"
 class GameService{
 
     getAllGenres(){
-        return ApiClient.get(`/genres?key=${config.API_KEY}`)
+        
+        return ApiClient.get(`/genres?key=${config.API_KEY}`).then(({ data:{results} })=>results)
     }
     getAllPlatforms(){
-        return ApiClient.get(`/platforms/lists/parents?key=${config.API_KEY}`)
+        return ApiClient.get(`/platforms/lists/parents?key=${config.API_KEY}`).then(({ data:{results} })=>results)
     }
     getFilteredGames(selectedGenre:GenreType,currentPlatform:PlatformType,orderBy:string){
         let URL =
@@ -22,8 +23,9 @@ class GameService{
         ? URL + `&parent_platforms=${currentPlatform.id}`
         : URL;
     URL = orderBy ? URL + `&ordering=${orderBy}` : URL;
+    
 
-    return ApiClient.get(URL)
+    return ApiClient.get(URL).then(({ data:{results} })=>results)
     }
 }
 
