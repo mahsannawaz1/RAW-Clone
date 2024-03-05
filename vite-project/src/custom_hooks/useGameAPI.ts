@@ -6,7 +6,8 @@ import GameService from "../services/GameService";
 import { useQuery } from "@tanstack/react-query";
 
 const useGameAPI = ()=>{
-
+  const [search, setSearch] = useState("");
+  const [clicked,setClicked] = useState(false)
     const { data:gens } = useQuery<GenreType[],Error,GenreType[]>({
       queryKey:['genres'],
       queryFn: GameService.getAllGenres
@@ -35,13 +36,13 @@ const useGameAPI = ()=>{
 
 
     const { data:gms } = useQuery<GameType[],Error,GameType[]>({
-      queryKey:['games',{"genre":selectedGenre.name,"platform":currentPlatform.name,"orderBy":orderBy}],
+      queryKey:['games',{"genre":selectedGenre.name,"platform":currentPlatform.name,"orderBy":orderBy},clicked],
       queryFn: ()=>{
-        return GameService.getFilteredGames(selectedGenre,currentPlatform,orderBy)
+        return GameService.getFilteredGames(selectedGenre,currentPlatform,orderBy,search)
       } 
     })
     const games = gms || []
-    console.log(games)
+    
   
     // useEffect(() => {
     //   GameService.getAllGenres()
@@ -64,6 +65,6 @@ const useGameAPI = ()=>{
     //     .catch((err) => console.log(err.message));
     // }, [selectedGenre, currentPlatform, orderBy]);
 
-    return { genres,platforms,games,selectedGenre,currentPlatform,setGenre,setPlatform,setOrderBy }
+    return { genres,platforms,games,selectedGenre,currentPlatform,setGenre,setPlatform,orderBy,setOrderBy,search,setSearch,clicked,setClicked }
 }
 export default useGameAPI;

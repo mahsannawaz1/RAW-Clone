@@ -17,10 +17,18 @@ function App() {
     setGenre,
     setPlatform,
     setOrderBy,
+    search,
+    setSearch,
+    clicked,
+    setClicked,
   } = useGameAPI();
   return (
     <Fragment>
       <Navbar
+        clicked={clicked}
+        setClicked={setClicked}
+        search={search}
+        setSearch={setSearch}
         darkMode={darkMode}
         handleDarkMode={() =>
           darkMode.isOn

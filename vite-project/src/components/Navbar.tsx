@@ -1,11 +1,29 @@
 import { CiSearch } from "react-icons/ci";
 import "./Navbar.css";
+import React from "react";
 
 interface Props {
+  search: string;
+  clicked: boolean;
+  setClicked: (str: boolean) => void;
+  setSearch: (str: string) => void;
   darkMode: { isOn: boolean; color: string };
   handleDarkMode: () => void;
 }
-const Navbar = ({ darkMode: { isOn: on, color }, handleDarkMode }: Props) => {
+const Navbar = ({
+  darkMode: { isOn: on, color },
+  handleDarkMode,
+  search,
+  setSearch,
+  setClicked,
+  clicked,
+}: Props) => {
+  const handleKeyPress = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(event.currentTarget.value);
+  };
+  const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key == "Enter") setClicked(!clicked);
+  };
   return (
     <nav className="mb-5">
       <div className="row align-items-center justify-content-between">
@@ -35,13 +53,15 @@ const Navbar = ({ darkMode: { isOn: on, color }, handleDarkMode }: Props) => {
         <div className="col-10 px-0">
           <div className="d-flex align-items-center rounded-pill search-div px-3 py-1">
             <CiSearch color="white" size={20} />
-            <form action="" className="d-flex w-100 mx-2">
-              <input
-                type="text"
-                className="flex-grow-1 p-1 search"
-                placeholder="Search Games..."
-              />
-            </form>
+
+            <input
+              value={search}
+              onChange={handleKeyPress}
+              onKeyDown={onKeyPress}
+              type="text"
+              className="flex-grow-1 p-1 search"
+              placeholder="Search Games..."
+            />
           </div>
         </div>
         <div className="col-1">
